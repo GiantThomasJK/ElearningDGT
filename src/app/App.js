@@ -1,18 +1,25 @@
-import './App.css';
-import Header from '../common/components/Header';
-import Carousel from 'common/components/Carousel';
-import Course from 'features/courses/Course';
-import InfoBox from 'common/components/InfoBox/InfoBox';
-import Categories from 'common/components/Categories/Categories';
+import "./App.css";
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Suspense } from "react";
+import Home from "features/pages/Home";
+import Detail from "features/pages/Detail";
+import Login from "features/pages/Login";
+import Profile from "features/pages/Profile";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Carousel />
-      <InfoBox/>
-      <Categories />
-      <Course />
+      <BrowserRouter>
+        <Suspense>
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/detail/:id" component={Detail}  />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Profile} />
+          </Switch>
+        </Suspense>
+      </BrowserRouter>
     </div>
   );
 }

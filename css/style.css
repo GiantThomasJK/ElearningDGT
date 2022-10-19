@@ -3479,12 +3479,12 @@ ul.list li a:hover {
 }
 
 .nav-tabs .nav-item.show .nav-link {
-  color: #ffffff ;
+  color: #ffffff;
   background: #21c87a;
 }
 
 .nav-tabs .nav-link.active {
-  color: #ffffff !important;
+  color: #ffffff;
   background: #21c87a;
 }
 
@@ -3608,13 +3608,16 @@ ul.list li a:hover {
 .course .course-img {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .course .course-img img {
   border-radius: 3px 3px 0px 0px;
   min-height: 100%;
   object-fit: cover;
+  background-position: center;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .course .course-img:before {
@@ -5627,7 +5630,7 @@ ul.list li a:hover {
 }
 
 .swiper-button-next i {
-  font-size: 20px !important;
+  font-size: 20px;
   color: rgba(255, 255, 255, 0.5) !important;
   background-color: rgba(172, 154, 154, 0.2);
   width: 50px;

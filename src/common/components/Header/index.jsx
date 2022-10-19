@@ -1,9 +1,101 @@
-import React from "react";
+import Login from "features/pages/Login";
+import Register from "features/authentication/Register";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+import { SET_PROFILE, signInAtion } from "redux/User/authAction";
 import "../../../scss/style.scss";
 
 function Header() {
+  const [sticky, setSticky] = useState(false);
+  const history = useHistory();
+  let user = {};
+  const dispatch = useDispatch();
+  const changeNavbar = () => {
+    if (window.scrollY > 100) {
+      setSticky(true);
+    } else {
+      setSticky(false);
+    }
+  };
+
+  window.addEventListener("scroll", changeNavbar);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("USER_LOGIN");
+
+    dispatch({
+      type: SET_PROFILE,
+      payload: null,
+    });
+    history.push("/");
+  };
+  const renderUserProfile = () => {
+    if (localStorage.getItem("USER_LOGIN")) {
+      user = JSON.parse(localStorage.getItem("USER_LOGIN"));
+      return (
+        <>
+          <li className="dropdown nav-item">
+          <a style={{paddingBottom: 50}}
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i className="fa fa-user ps-2 text-primary" />
+            Hi, {user.taiKhoan}
+          </a>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a style={{color: "#666666"}} className="dropdown-item" href="#">
+                <span>Profile</span>
+              </a>
+            </li>
+            <li>
+              <a style={{color: "#666666"}} className="dropdown-item" href="#">
+                <span>Register</span>
+              </a>
+            </li>
+          </ul>
+          </li>
+          <a style={{ marginLeft: 10 }} onClick={handleLogout} href="#">
+            Log out
+          </a>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <NavLink to="/login">
+          Sign in
+          <i className="fa fa-user ps-2 text-primary" />
+        </NavLink>
+        {/* <a
+          style={{ color: "white" }}
+          className="mr-5 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500"
+          href="#"
+          onClick={handleLogout}
+        >
+          Log out
+        </a> */}
+      </>
+    );
+  };
+
   return (
-    <header className="header header-sticky default-transparent">
+    <header
+      className={
+        sticky
+          ? "header header-sticky default-transparent is-sticky"
+          : "header header-sticky default-transparent"
+      }
+    >
       <nav className="navbar navbar-static-top navbar-expand-lg px-3 px-md-5">
         <div className="container-fluid position-relative px-0">
           <button
@@ -14,9 +106,9 @@ function Header() {
           >
             <i className="fas fa-align-left" />
           </button>
-          <a className="navbar-brand" href="index.html">
+          <NavLink to="/" className="navbar-brand">
             <img className="img-fluid" src="images/logo.svg" alt="logo" />
-          </a>
+          </NavLink>
           <div className="search-category ms-auto">
             <div className="form-group select-border course-category">
               <i className="fa fa-th text-primary me-2" aria-hidden="true" />
@@ -425,9 +517,9 @@ function Header() {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="shop.html">
+                    {/* <a className="dropdown-item" href="shop.html">
                       <span>Shop</span>
-                    </a>
+                    </a> */}
                   </li>
                   <li>
                     <a className="dropdown-item" href="cart.html">
@@ -440,27 +532,22 @@ function Header() {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="shop-single.html">
+                    {/* <a className="dropdown-item" href="shop-single.html">
                       <span>Shop single</span>
-                    </a>
+                    </a> */}
                   </li>
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <a className="nav-link" href="contact-us.html">
                   Contact us
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="woo-action">
             <ul className="list-unstyled">
-              <li className="user">
-                <a data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
-                  Hello sign in
-                  <i className="fa fa-user ps-2 text-primary" />
-                </a>
-              </li>
+              <li className="user">{renderUserProfile()}</li>
               <div
                 className="modal login fade"
                 id="loginModal"
@@ -501,7 +588,6 @@ function Header() {
                             aria-controls="login"
                             aria-selected="false"
                           >
-                            {" "}
                             <span> Log in</span>
                           </a>
                         </li>
@@ -520,206 +606,10 @@ function Header() {
                         </li>
                       </ul>
                       <div className="tab-content" id="myTabContent">
-                        <div
-                          className="tab-pane fade show active"
-                          id="login"
-                          role="tabpanel"
-                          aria-labelledby="login-tab"
-                        >
-                          <form className="row my-4 align-items-center">
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Username"
-                              />
-                            </div>
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="Password"
-                                className="form-control"
-                                placeholder="Password"
-                              />
-                            </div>
-                            <div className="col-sm-6 d-grid">
-                              <button type="submit" className="btn btn-primary">
-                                Sign up
-                              </button>
-                            </div>
-                            <div className="col-sm-6">
-                              <ul className="list-unstyled d-flex mb-1 mt-sm-0 mt-3">
-                                <li className="me-1">
-                                  <a className="text-dark" href="#">
-                                    <b>
-                                      Already Registered User? Click here to
-                                      login
-                                    </b>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </form>
-                          <div className="login-social-media border ps-4 pe-4 pb-4 pt-0 rounded-sm">
-                            <div className="mb-4 d-block text-center">
-                              <b className="bg-white ps-2 pe-2 mt-3 d-block">
-                                Login or Sign in with
-                              </b>
-                            </div>
-                            <form className="row">
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn facebook-bg social-bg-hover d-block mb-3"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-facebook-f me-2" />
-                                    Login with Facebook
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn twitter-bg social-bg-hover d-block mb-3"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-twitter me-2" />
-                                    Login with Twitter
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn instagram-bg social-bg-hover d-block mb-3 mb-sm-0"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-instagram me-2" />
-                                    Login with Instagram
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn linkedin-bg social-bg-hover d-block"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-linkedin-in me-2" />
-                                    Login with Linkedin
-                                  </span>
-                                </a>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                        <div
-                          className="tab-pane fade"
-                          id="register"
-                          role="tabpanel"
-                          aria-labelledby="register-tab"
-                        >
-                          <form className="row my-4 align-items-center">
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Username"
-                              />
-                            </div>
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Email Address"
-                              />
-                            </div>
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="Password"
-                                className="form-control"
-                                placeholder="Password"
-                              />
-                            </div>
-                            <div className="mb-3 col-sm-12">
-                              <input
-                                type="Password"
-                                className="form-control"
-                                placeholder="Confirm Password"
-                              />
-                            </div>
-                            <div className="col-sm-6 d-grid">
-                              <button type="submit" className="btn btn-primary">
-                                Sign up
-                              </button>
-                            </div>
-                            <div className="col-sm-6">
-                              <ul className="list-unstyled d-flex mb-1 mt-sm-0 mt-3">
-                                <li className="me-1">
-                                  <a className="text-dark" href="#">
-                                    <b>
-                                      Already Registered User? Click here to
-                                      login
-                                    </b>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </form>
-                          <div className="login-social-media border ps-4 pe-4 pb-4 pt-0 rounded-sm">
-                            <div className="mb-4 d-block text-center">
-                              <b className="bg-white ps-2 pe-2 mt-3 d-block">
-                                Login or Sign in with
-                              </b>
-                            </div>
-                            <form className="row">
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn facebook-bg social-bg-hover d-block mb-3"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-facebook-f me-2" />
-                                    Login with Facebook
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn twitter-bg social-bg-hover d-block mb-3"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-twitter me-2" />
-                                    Login with Twitter
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn instagram-bg social-bg-hover d-block mb-3 mb-sm-0"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-instagram me-2" />
-                                    Login with Instagram
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-sm-6">
-                                <a
-                                  className="btn linkedin-bg social-bg-hover d-block"
-                                  href="#"
-                                >
-                                  <span>
-                                    <i className="fab fa-linkedin-in me-2" />
-                                    Login with Linkedin
-                                  </span>
-                                </a>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
+                        {/* <Login />
+                        <Register /> */}
+                        {/* Login
+                        Register */}
                       </div>
                     </div>
                   </div>

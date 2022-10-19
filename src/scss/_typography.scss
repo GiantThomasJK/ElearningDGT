@@ -126,9 +126,9 @@ small,
 }
 
 /* Flaticon */
-[class^="flaticon-"]:before, 
-[class*=" flaticon-"]:before, 
-[class^="flaticon-"]:after, 
+[class^="flaticon-"]:before,
+[class*=" flaticon-"]:before,
+[class^="flaticon-"]:after,
 [class*=" flaticon-"]:after {
 	margin-left: 0;
 	font-size: inherit;
@@ -136,7 +136,7 @@ small,
 
 /* Inner header */
 .inner-header {
-	padding: 60px 0;
+	padding: 120px 0;
 	.breadcrumb {
 		background: transparent;
 		margin-bottom: 0;
@@ -168,7 +168,7 @@ small,
 		font-size: 50px;
 		font-weight: 700;
 		line-height: 50px;
-	}	
+	}
 }
 
 /*****************************
@@ -296,5 +296,5 @@ small,
 			font-size: 30px;
 		}
 	}
-	
+
 }
