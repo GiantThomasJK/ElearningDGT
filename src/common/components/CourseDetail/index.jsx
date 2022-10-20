@@ -1,12 +1,26 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { RegisterCoureAction } from "redux/Courses/courseAction";
 
 function CourseDetail() {
-
-
+  const dispatch = useDispatch();
   let course = {};
+  let user = {};
   if (localStorage.getItem("courseDetails")) {
     course = JSON.parse(localStorage.getItem("courseDetails"));
   }
+  if (localStorage.getItem("USER_LOGIN")) {
+    user = JSON.parse(localStorage.getItem("USER_LOGIN"));
+  }
+
+  var registerCourse = {
+    maKhoaHoc: course.maKhoaHoc,
+    taiKhoan: user.taiKhoan,
+  };
+
+  const registerCourseAction = async () => {
+   await dispatch(RegisterCoureAction(registerCourse));
+  };
 
   return (
     <div>
@@ -15,9 +29,7 @@ function CourseDetail() {
           <div className="row">
             <div className="col-md-7 col-xl-8">
               <img className="img-fluid  mb-4" src={course.hinhAnh} alt="" />
-              <h4 className="news-title mb-2">
-                {course.tenKhoaHoc}
-              </h4>
+              <h4 className="news-title mb-2">{course.tenKhoaHoc}</h4>
               <div className="d-flex align-items-center">
                 <span className="text-warning h6 mb-0 me-2">3.5</span>
                 <ul className="list-unstyled d-flex mb-0 me-2">
@@ -98,7 +110,7 @@ function CourseDetail() {
                     <div className="d-block">
                       <p className="mb-0">Teacher</p>
                       <span className="lead fw-6 text-dark">
-                      {course.nguoiTao.hoTen}
+                        {course.nguoiTao.hoTen}
                       </span>
                     </div>
                   </div>
@@ -109,7 +121,7 @@ function CourseDetail() {
                     <div className="d-block">
                       <p className="mb-0">Categories</p>
                       <span className="lead fw-6 text-dark">
-                      {course.danhMucKhoaHoc.tenDanhMucKhoaHoc}
+                        {course.danhMucKhoaHoc.tenDanhMucKhoaHoc}
                       </span>
                     </div>
                   </div>
@@ -120,7 +132,7 @@ function CourseDetail() {
                     <div className="d-block">
                       <p className="mb-0">Students</p>
                       <span className="lead fw-6 text-dark">
-                      {course.soLuongHocVien} (Registered)
+                        {course.soLuongHocVien} (Registered)
                       </span>
                     </div>
                   </div>
@@ -134,11 +146,7 @@ function CourseDetail() {
                   <span className="lead text-dark fw-6">
                     Course Description
                   </span>
-                  <p className="mt-2">
-                  {course.moTa}
-                  </p>
-
-
+                  <p className="mt-2">{course.moTa}</p>
                 </div>
               </div>
               <div className="border mb-4">
@@ -690,7 +698,7 @@ function CourseDetail() {
                 <div className="widget widget-price">
                   <h6 className="widget-title">Price</h6>
                   <div className="widget-content">
-                    <a className="btn btn-primary" href="#">
+                    <a onClick={() => registerCourseAction()} className="btn btn-primary" href="#">
                       Get course
                     </a>
                     <span className="fw-bold text-success lead ms-3">Free</span>
@@ -708,7 +716,9 @@ function CourseDetail() {
                         />
                       </div>
                     </div>
-                    <span className="lead fw-6 text-dark">{course.nguoiTao.hoTen}</span>
+                    <span className="lead fw-6 text-dark">
+                      {course.nguoiTao.hoTen}
+                    </span>
                     <p className="mb-0">Member Since May 2009</p>
                     <ul className="d-flex mb-0 list-unstyled mt-2">
                       <li>

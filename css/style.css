@@ -186,7 +186,7 @@ small,
 
 /* Inner header */
 .inner-header {
-  padding: 60px 0;
+  padding: 120px 0;
 }
 
 .inner-header .breadcrumb {
@@ -4910,7 +4910,7 @@ ul.list li a:hover {
 
 .header .woo-action > ul li {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 12px;
 }
 
 .header .woo-action > ul li:last-child {
@@ -6276,7 +6276,6 @@ textarea.form-control {
 }
 
 .form-flat-style .form-control {
-  background-color: #f9f9f9;
   border-color: #eaeaea;
   border-radius: 3px;
 }

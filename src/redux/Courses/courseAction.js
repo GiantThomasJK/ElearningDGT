@@ -1,4 +1,6 @@
 import instance from "api/instance";
+import instanceAuthor from "api/instanceAuthor";
+import swal from "sweetalert";
 
 export const actionTypes = {
   SET_CATEGORIES: "courses/SET_CATEGORIES",
@@ -52,5 +54,55 @@ export const fetchCourseAction = (maDM) => {
   };
 };
 
+export const RegisterCoureAction = (ttdk) => {
+  return async (dispatch) => {
+    try {
+      const res = await instanceAuthor.request({
+        url: "/api/QuanLyKhoaHoc/DangKyKhoaHoc",
+        method: "POST",
+        data: ttdk,
+      });
+
+      if(res.status === 200){
+        swal({
+          title: "Uploaded!",
+          text: "Course Register Successfully",
+          icon: "success",
+          button: "OK",
+        })
+      }
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+
+export const deleteCourseAction = (ttdk) => {
+  return async (dispatch) => {
+    try {
+      const res = await instanceAuthor.request({
+        url: "/api/QuanLyKhoaHoc/DangKyKhoaHoc",
+        method: "POST",
+        data: ttdk,
+      });
+
+      if(res.status === 200){
+        swal({
+          title: "Uploaded!",
+          text: "Course Register Successfully",
+          icon: "success",
+          button: "OK",
+        })
+      }
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 
