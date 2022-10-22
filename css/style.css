@@ -5014,10 +5014,6 @@ ul.list li a:hover {
   opacity: 1;
 }
 
-.header.default-transparent .woo-action ul li > a {
-  color: #ffffff;
-}
-
 .header.default-transparent .woo-action ul li > a:hover {
   color: #21c87a;
 }

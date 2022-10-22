@@ -65,7 +65,7 @@ export const RegisterCoureAction = (ttdk) => {
 
       if(res.status === 200){
         swal({
-          title: "Uploaded!",
+          title: "Registered!",
           text: "Course Register Successfully",
           icon: "success",
           button: "OK",
@@ -84,15 +84,15 @@ export const deleteCourseAction = (ttdk) => {
   return async (dispatch) => {
     try {
       const res = await instanceAuthor.request({
-        url: "/api/QuanLyKhoaHoc/DangKyKhoaHoc",
+        url: "/api/QuanLyKhoaHoc/HuyGhiDanh",
         method: "POST",
         data: ttdk,
       });
 
       if(res.status === 200){
         swal({
-          title: "Uploaded!",
-          text: "Course Register Successfully",
+          title: "Deleted!",
+          text: "Course Delete Successfully",
           icon: "success",
           button: "OK",
         })

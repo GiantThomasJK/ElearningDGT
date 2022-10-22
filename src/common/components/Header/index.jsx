@@ -24,8 +24,10 @@ function Header() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    localStorage.removeItem("PROFILE_USER");
     localStorage.removeItem("token");
     localStorage.removeItem("USER_LOGIN");
+    localStorage.removeItem("courseDetails");
 
     dispatch({
       type: SET_PROFILE,
@@ -39,33 +41,56 @@ function Header() {
       return (
         <>
           <li className="dropdown nav-item">
-          <a style={{paddingBottom: 50}}
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <i className="fa fa-user ps-2 text-primary" />
-            Hi, {user.taiKhoan}
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a style={{color: "#666666"}} className="dropdown-item" href="#">
-                <span>Profile</span>
-              </a>
-            </li>
-            <li>
-              <a style={{color: "#666666"}} className="dropdown-item" href="#">
-                <span>Register</span>
-              </a>
-            </li>
-          </ul>
+            {/* <a
+              style={{ paddingBottom: 50 }}
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i className="fa fa-user ps-2 text-primary" />
+              Hi, {user.taiKhoan}
+            </a> */}
+
+            <ul className="nav navbar-nav">
+              <li className="nav-item dropdown active">
+                <a
+                  className="nav-link"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i className="fa fa-user ps-2 text-primary" />
+                  Hi, {user.taiKhoan}
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <NavLink
+                      to="/profile"
+                      className="dropdown-item"
+                      href="index.html"
+                    >
+                      <span>Profile</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      onClick={handleLogout}
+                      href="index-02.html"
+                    >
+                      <span> Log out</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
-          <a style={{ marginLeft: 10 }} onClick={handleLogout} href="#">
-            Log out
-          </a>
         </>
       );
     }
@@ -76,14 +101,6 @@ function Header() {
           Sign in
           <i className="fa fa-user ps-2 text-primary" />
         </NavLink>
-        {/* <a
-          style={{ color: "white" }}
-          className="mr-5 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500"
-          href="#"
-          onClick={handleLogout}
-        >
-          Log out
-        </a> */}
       </>
     );
   };
@@ -164,7 +181,6 @@ function Header() {
               placeholder="Search Courses..."
             />
             <button className="search-button" type="submit">
-              {" "}
               <i className="fa fa-search" />
             </button>
           </div>

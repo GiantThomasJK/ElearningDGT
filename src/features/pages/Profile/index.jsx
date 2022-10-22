@@ -9,6 +9,10 @@ import TabPane from "antd/lib/tabs/TabPane";
 import { useFormik } from "formik";
 import Header from "common/components/Header";
 import FooterPage from "common/components/Footer";
+import swal from "sweetalert";
+import { deleteCourseAction } from "redux/Courses/courseAction";
+import InnerInfo from "common/components/InnerInfor";
+import user1 from "assets/images/inner/user1.jpg";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -19,9 +23,18 @@ function Profile() {
     await dispatch(fetchUserProfileAction());
   };
 
-  const onDelete = async (maKhoaHoc,taiKhoan) => {
+  const onDelete = async (maKhoaHoc, taiKhoan) => {
+    var deleteCourse = {
+      maKhoaHoc: maKhoaHoc,
+      taiKhoan: taiKhoan,
+    };
 
-  }
+    await dispatch(deleteCourseAction(deleteCourse));
+  };
+
+  useEffect (()=>{
+
+  },[user?.chiTietKhoaHocGhiDanh])
 
   const formik = useFormik({
     initialValues: {
@@ -53,12 +66,12 @@ function Profile() {
   return (
     <>
       <Header />
-      <InnerHeader />
+      <InnerInfo />
       <section className="space-pb teacher-detail">
         <div className="container">
           <div className="row">
             <div className="col-md-5 col-xl-4 position-relative z-index-1 mt-n5">
-              <img className="img-fluid" src={c1} alt="" />
+              <img className="img-fluid" src={user1} alt="" />
               <div className="border border-top-0 py-4 py-sm-5">
                 <ul className="ps-0 mb-0">
                   <li className="d-flex align-items-center px-4 mb-4">
@@ -248,7 +261,23 @@ function Profile() {
                               <td>{item.maKhoaHoc}</td>
                               <td>{item.ngayTao}</td>
                               <td>
-                                <button onClick={() => onDelete(item.maKhoaHoc,user.taiKhoan)} className="btn-danger">Delete</button>
+                                <button
+                                  onClick={() => {
+                                    swal({
+                                      title: "Are you sure?",
+                                      text: "Are you sure that you want to delete this movie?",
+                                      icon: "warning",
+                                      dangerMode: true,
+                                    }).then((willDetele) => {
+                                      if (willDetele) {
+                                        onDelete(item.maKhoaHoc, user.taiKhoan);
+                                      }
+                                    });
+                                  }}
+                                  className="btn-danger"
+                                >
+                                  Delete
+                                </button>
                               </td>
                             </tr>
                           );
