@@ -25,7 +25,7 @@ function InnerInfo() {
                 </a>
               </li>
               <li className="breadcrumb-item active">
-                <span>{user.hoTen}</span>
+                <span>{user?.hoTen}</span>
               </li>
             </ol>
           </div>

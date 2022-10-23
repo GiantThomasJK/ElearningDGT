@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { RegisterCoureAction } from "redux/Courses/courseAction";
+import user1 from "assets/images/inner/user1.jpg";
+
+import swal from "sweetalert";
 
 function CourseDetail() {
   const dispatch = useDispatch();
@@ -19,7 +22,7 @@ function CourseDetail() {
   };
 
   const registerCourseAction = async () => {
-   await dispatch(RegisterCoureAction(registerCourse));
+    await dispatch(RegisterCoureAction(registerCourse));
   };
 
   return (
@@ -104,7 +107,7 @@ function CourseDetail() {
                   <div className="d-flex">
                     <img
                       className="me-2 me-lg-3 mt-2"
-                      src={course.hinhAnh}
+                      src={user1}
                       alt=""
                     />
                     <div className="d-block">
@@ -698,7 +701,22 @@ function CourseDetail() {
                 <div className="widget widget-price">
                   <h6 className="widget-title">Price</h6>
                   <div className="widget-content">
-                    <a onClick={() => registerCourseAction()} className="btn btn-primary" href="#">
+                    <a
+                      onClick={() => {
+                        swal({
+                          title: "Are you sure?",
+                          text: "Are you sure that you want to register this course?",
+                          icon: "success",
+                          dangerMode: true,
+                        }).then((willDetele) => {
+                          if (willDetele) {
+                            registerCourseAction();
+                          }
+                        });
+                      }}
+                      className="btn btn-primary"
+                      href="#"
+                    >
                       Get course
                     </a>
                     <span className="fw-bold text-success lead ms-3">Free</span>
@@ -711,7 +729,7 @@ function CourseDetail() {
                       <div className="col-sm-4">
                         <img
                           className="rounded-circle img-fluid mb-2"
-                          src="images/avatar/04.jpg"
+                          src={user1}
                           alt
                         />
                       </div>

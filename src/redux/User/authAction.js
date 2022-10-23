@@ -43,10 +43,10 @@ export const addUsersAction = (userData) => {
         payload: res.data.content,
       });
 
-      if (res.data.status === 200) {
+      if (res.status === 200) {
         swal({
-          title: "ADDED!",
-          text: "User Added Successfully",
+          title: "Registered!",
+          text: "Register Successfully",
           icon: "success",
           button: "OK",
         });
@@ -73,6 +73,35 @@ export const fetchUserProfileAction = () => {
         type: FETCH_USER,
         payload: res.data.data,
       });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+
+export const updateUsersAction = (nd) => {
+  return async (dispatch) => {
+    try {
+      const res = await instanceAuthor.request({
+        url: "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+        method: "PUT",
+        data: nd,
+      });
+
+      // dispatch({
+      //   type: ADD_USER,
+      //   payload: res.data.content,
+      // });
+
+      if (res.status === 200) {
+        swal({
+          title: "UPDATED!",
+          text: "User Updated Successfully",
+          icon: "success",
+          button: "OK",
+        });
+      }
     } catch (err) {
       console.log(err);
     }

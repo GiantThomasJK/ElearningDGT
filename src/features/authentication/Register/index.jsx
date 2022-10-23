@@ -27,8 +27,7 @@ function Register() {
 
   const handleAddUser = async (user) => {
     await dispatch(addUsersAction(user));
-    history.push("/");
-
+    history.push("/login");
   };
 
   return (
@@ -46,55 +45,49 @@ function Register() {
         className="row my-4 align-items-center"
       >
         <div className="mb-3 col-sm-12">
+          <label class="form-label">Username:</label>
           <input
             name="taiKhoan"
             onChange={formik.handleChange}
             type="text"
             className="form-control"
-            placeholder="Username"
           />
         </div>
         <div className="mb-3 col-sm-12">
+          <label class="form-label">Email Address:</label>
+
           <input
             onChange={formik.handleChange}
             name="email"
             type="text"
             className="form-control"
-            placeholder="Email Address"
           />
         </div>
         <div className="mb-3 col-sm-12">
+          <label class="form-label">Full Name:</label>
           <input
             name="hoTen"
             onChange={formik.handleChange}
             type="text"
             className="form-control"
-            placeholder="Full Name"
           />
         </div>
         <div className="mb-3 col-sm-12">
+          <label class="form-label">Phone Number:</label>
           <input
             name="soDT"
             onChange={formik.handleChange}
             type="text"
             className="form-control"
-            placeholder="Phone Number"
           />
         </div>
         <div className="mb-3 col-sm-12">
+          <label class="form-label">Password:</label>
           <input
             name="matKhau"
             type="Password"
             onChange={formik.handleChange}
             className="form-control"
-            placeholder="Password"
-          />
-        </div>
-        <div className="mb-3 col-sm-12">
-          <input
-            type="Password"
-            className="form-control"
-            placeholder="Confirm Password"
           />
         </div>
         <div className="col-sm-6 d-grid">

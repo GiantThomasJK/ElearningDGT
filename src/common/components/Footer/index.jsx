@@ -1,4 +1,6 @@
 import React from "react";
+import logo from "assets/images/home/logoDark.png"
+
 import bg from "assets/images/bg/05.jpg"
 function FooterPage() {
   return (
@@ -13,19 +15,19 @@ function FooterPage() {
               <div className="footer-contact-info">
                 <div className="footer-logo mb-2">
                   <a href="index.html">
-                    <img className="img-fluid" src={bg} alt="" />
+                    <img className="img-fluid" src={logo} alt="" />
                   </a>
                 </div>
                 <div className="contact-address">
                   <div className="contact-item mb-3 mb-md-4">
                     <p>
-                      17504 Carlton Cuevas Rd, <br />
-                      Gulfport, MS, 39503
+                    Tầng 2, toà nhà WinHome, <br />
+                    459 Sư Vạn hạnh, Quận 10, TPHCM
                     </p>
                   </div>
                   <div className="contact-item mb-3 mb-md-4">
                     <h4 className="mb-0 fw-normal">
-                      <a href="#">+(704) 16071072</a>
+                      <a href="#">+(87) 16071072</a>
                     </h4>
                   </div>
                   <div className="contact-item">

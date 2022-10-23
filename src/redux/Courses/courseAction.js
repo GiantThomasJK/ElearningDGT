@@ -17,6 +17,10 @@ export const fetchCategoriesAction = () => {
         method: "GET",
       });
 
+      const categories = { ...res.data };
+      localStorage.setItem("CATEGORIES", JSON.stringify(categories));
+
+
 
       dispatch({
         type: actionTypes.SET_CATEGORIES,

@@ -5,12 +5,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { SET_PROFILE, signInAtion } from "redux/User/authAction";
+import logo from "assets/images/home/logoLearn.png";
 import "../../../scss/style.scss";
 
 function Header() {
   const [sticky, setSticky] = useState(false);
   const history = useHistory();
   let user = {};
+  let categories = {};
   const dispatch = useDispatch();
   const changeNavbar = () => {
     if (window.scrollY > 100) {
@@ -22,6 +24,10 @@ function Header() {
 
   window.addEventListener("scroll", changeNavbar);
 
+  if (localStorage.getItem("CATEGORIES")) {
+    categories = JSON.parse(localStorage.getItem("CATEGORIES"));
+    console.log(categories);
+  }
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("PROFILE_USER");
@@ -65,7 +71,10 @@ function Header() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i className="fa fa-user ps-2 text-primary" />
+                  <i
+                    style={{ marginRight: 4 }}
+                    className="fa fa-user ps-2 text-primary"
+                  />
                   Hi, {user.taiKhoan}
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -97,7 +106,7 @@ function Header() {
 
     return (
       <>
-        <NavLink to="/login">
+        <NavLink style={{ color: "#ffffff" }} to="/login">
           Sign in
           <i className="fa fa-user ps-2 text-primary" />
         </NavLink>
@@ -124,11 +133,11 @@ function Header() {
             <i className="fas fa-align-left" />
           </button>
           <NavLink to="/" className="navbar-brand">
-            <img className="img-fluid" src="images/logo.svg" alt="logo" />
+            <img className="img-fluid" src={logo} alt="logo" />
           </NavLink>
           <div className="search-category ms-auto">
             <div className="form-group select-border course-category">
-              <i className="fa fa-th text-primary me-2" aria-hidden="true" />
+              {/* <i className="fa fa-th text-primary me-2" aria-hidden="true" />
               <select className=" basic-select">
                 <option selected="selected">Category</option>
                 <option>Design</option>
@@ -139,7 +148,7 @@ function Header() {
                 <option>Music</option>
                 <option>Personal Development</option>
                 <option>Business</option>
-              </select>
+              </select> */}
               {/* <span
                 className="select2 select2-container select2-container--default select2-container--below select2-container--focus"
                 dir="ltr"
@@ -189,7 +198,7 @@ function Header() {
               <li className="nav-item dropdown active">
                 <a
                   className="nav-link"
-                  href="#"
+                  href="/"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -197,35 +206,7 @@ function Header() {
                   aria-expanded="false"
                 >
                   Home
-                  <i className="fas fa-chevron-down fa-xs" />
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li className="active">
-                    <a className="dropdown-item" href="index.html">
-                      <span>Home 01</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="index-02.html">
-                      <span>Home 02</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="index-03.html">
-                      <span>Home 03</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="index-04.html">
-                      <span>Home 04</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="index-05.html">
-                      <span>Home 05</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li className="dropdown nav-item">
                 <a
@@ -236,105 +217,52 @@ function Header() {
                   Course
                   <i className="fas fa-chevron-down fa-xs" />
                 </a>
-                <ul className="dropdown-menu megamenu dropdown-menu-md">
+                <ul className="dropdown-menu megamenu ">
                   <li>
                     <div className="row g-0">
                       <div className="col-sm-6">
                         <h6 className="nav-title">Course Pages</h6>
                         <ul className="list-unstyled mt-lg-1">
+                          {/* {categories.map((item,index) =>{
+                            return(
+                              <li>
+                              <a
+                                className="dropdown-item"
+                                href="#"
+                              >
+                                <span>{item.tenDanhMuc}</span>
+                              </a>
+                            </li>
+                            )
+                          })} */}
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-list.html"
-                            >
-                              <span>Course List</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[0].tenDanhMuc}</span>
                             </a>
                           </li>
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-list-map.html"
-                            >
-                              <span>Course List With Map</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[1].tenDanhMuc}</span>
                             </a>
                           </li>
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-grid.html"
-                            >
-                              <span>Course Gird</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[2].tenDanhMuc}</span>
                             </a>
                           </li>
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-grid-map.html"
-                            >
-                              <span>Course Gird With Map</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[3].tenDanhMuc}</span>
                             </a>
                           </li>
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-detail-style-01.html"
-                            >
-                              <span>Course Detail Style 01</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[4].tenDanhMuc}</span>
                             </a>
                           </li>
                           <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-detail-style-02.html"
-                            >
-                              <span>Course Detail Style 02</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6">
-                        <h6 className="nav-title">Course Pages</h6>
-                        <ul className="list-unstyled mt-lg-1">
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="course-detail-style-03.html"
-                            >
-                              <span>Course Detail Style 03</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="membership-levels.html"
-                            >
-                              <span>Membership Levels</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="events.html">
-                              <span>Events</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="event-detail.html"
-                            >
-                              <span>Event Detail</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="teachers.html">
-                              <span>Teachers</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="teacher-detail.html"
-                            >
-                              <span>Teacher Detail</span>
+                            <a className="dropdown-item" href="#">
+                              <span>{categories[5].tenDanhMuc}</span>
                             </a>
                           </li>
                         </ul>
@@ -352,82 +280,30 @@ function Header() {
                   Pages
                   <i className="fas fa-chevron-down fa-xs" />
                 </a>
-                <ul className="dropdown-menu megamenu dropdown-menu-lg">
+                <ul className="dropdown-menu megamenu">
                   <li>
                     <div className="row g-0">
                       <div className="col-sm-6 col-md-4">
                         <h6 className="nav-title">Basic Pages</h6>
                         <ul className="list-unstyled mt-lg-1">
                           <li>
-                            <a className="dropdown-item" href="about-us.html">
-                              <span>About us</span>
+                            <a className="dropdown-item" href="/">
+                              <span>Home</span>
                             </a>
                           </li>
                           <li>
-                            <a className="dropdown-item" href="contact-us.html">
-                              <span>Contact us</span>
+                            <a className="dropdown-item" href="/">
+                              <span>Course</span>
                             </a>
                           </li>
                           <li>
-                            <a className="dropdown-item" href="gallery.html">
-                              <span>Gallery</span>
+                            <a className="dropdown-item" href="/profile">
+                              <span>Profile</span>
                             </a>
                           </li>
                           <li>
-                            <a className="dropdown-item" href="login.html">
-                              <span>login</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-4">
-                        <h6 className="nav-title">Information Pages</h6>
-                        <ul className="list-unstyled mt-lg-1">
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="privacy-policy.html"
-                            >
-                              <span>Privacy policy</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="terms-and-conditions.html"
-                            >
-                              <span>Terms &amp; conditions</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="faqs.html">
-                              <span>FAQs</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-sm-6 col-md-4">
-                        <h6 className="nav-title">Extra Pages</h6>
-                        <ul className="list-unstyled mt-lg-1">
-                          <li>
-                            <a className="dropdown-item" href="error-404.html">
-                              <span>404 error</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="coming-soon.html"
-                            >
-                              <span>Coming soon</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="dropdown-item"
-                              href="maintenance.html"
-                            >
-                              <span>Maintenance</span>
+                            <a className="dropdown-item" href="/login">
+                              <span>Login</span>
                             </a>
                           </li>
                         </ul>
@@ -442,82 +318,8 @@ function Header() {
                   href="javascript:void(0)"
                   data-bs-toggle="dropdown"
                 >
-                  Blog
-                  <i className="fas fa-chevron-down fa-xs" />
+                  Contact us
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="classic-full-width.html">
-                      <span>Classic Full width</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      href="classic-left-sidebar.html"
-                    >
-                      <span>Classic Left Sidebar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="blog-single.html">
-                      <span>Blog single</span>
-                    </a>
-                  </li>
-                  <li className="dropdown-submenu">
-                    <a className="dropdown-item dropdown-toggle" href="#">
-                      Dropdown <i className="fas fa-chevron-right fa-xs" />
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Submenu
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          Submenu
-                        </a>
-                      </li>
-                      <li className="dropdown-submenu">
-                        <a className="dropdown-item dropdown-toggle" href="#">
-                          Submenu 01{" "}
-                          <i className="fas fa-chevron-right fa-xs" />
-                        </a>
-                        <ul className="dropdown-menu">
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Subsubmenu 01
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Subsubmenu 01
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="dropdown-submenu">
-                        <a className="dropdown-item dropdown-toggle" href="#">
-                          Submenu 02{" "}
-                          <i className="fas fa-chevron-right fa-xs" />
-                        </a>
-                        <ul className="dropdown-menu">
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Subsubmenu 02
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Subsubmenu 02
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -645,7 +447,7 @@ function Header() {
                     <i className="fas fa-shopping-cart" />
                   </span>
                 </button>
-                <div
+                {/* <div
                   className="dropdown-menu dropdown-menu-right"
                   aria-labelledby="dropdownMenuButton"
                 >
@@ -703,7 +505,7 @@ function Header() {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </li>
             </ul>
           </div>

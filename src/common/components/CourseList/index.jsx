@@ -28,7 +28,7 @@ function CourseList(props) {
   return (
     <div>
       <div className="my-shuffle-container grid-4">
-        <Row gutter={10}>
+        <Row gutter={15}>
           {selectCourses?.map((item, index) => {
             return (
               <Col
@@ -45,7 +45,7 @@ function CourseList(props) {
               >
                 <div className="course">
                   <div className="course-img">
-                    <img className="img-fluid" src={item.hinhAnh} alt="" />
+                    <img style={{height: 215}} className="img-fluid" src={item.hinhAnh} alt="" />
                     <a href="#" className="course-category">
                       <i className="far fa-bookmark" />
                       {item.tenKhoaHoc}

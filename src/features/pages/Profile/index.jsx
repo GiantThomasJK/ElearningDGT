@@ -2,7 +2,10 @@ import InnerHeader from "common/components/InnerHeader";
 import React, { useEffect, useState } from "react";
 import c1 from "assets/images/categories/categories1.webp";
 import { useDispatch } from "react-redux";
-import { fetchUserProfileAction } from "redux/User/authAction";
+import {
+  fetchUserProfileAction,
+  updateUsersAction,
+} from "redux/User/authAction";
 import SignIn from "../../authentication/SignIn";
 import { Tabs, Row, Col } from "antd";
 import TabPane from "antd/lib/tabs/TabPane";
@@ -13,9 +16,11 @@ import swal from "sweetalert";
 import { deleteCourseAction } from "redux/Courses/courseAction";
 import InnerInfo from "common/components/InnerInfor";
 import user1 from "assets/images/inner/user1.jpg";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isEditing, setIsEditing] = useState(false);
   let user = JSON.parse(localStorage.getItem("PROFILE_USER"));
 
@@ -32,9 +37,7 @@ function Profile() {
     await dispatch(deleteCourseAction(deleteCourse));
   };
 
-  useEffect (()=>{
-
-  },[user?.chiTietKhoaHocGhiDanh])
+  useEffect(() => {}, [user?.chiTietKhoaHocGhiDanh]);
 
   const formik = useFormik({
     initialValues: {
@@ -48,8 +51,14 @@ function Profile() {
     },
     onSubmit: (values) => {
       values.maNhom = "GP01";
+      console.log(values);
+      onUpdate(values);
     },
   });
+
+  const onUpdate = async (user) => {
+    await dispatch(updateUsersAction(user));
+  };
 
   const onEdit = () => {
     setIsEditing(true);
@@ -222,6 +231,7 @@ function Profile() {
                           <div className="col-sm-6 d-grid">
                             <button
                               type="submit"
+                              onClick={() => onUpdate}
                               className="btn btn-primary btn-flat"
                             >
                               Save

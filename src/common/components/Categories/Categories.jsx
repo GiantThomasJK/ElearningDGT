@@ -44,7 +44,7 @@ function Categories() {
                     src={c2}
                     alt =""
                   />
-                  <h6 className="categories-title">Lập trình Backend</h6>
+                  <h6 className="categories-title">Thiết kế Web</h6>
                 </div>
               </a>
             </div>
@@ -56,7 +56,7 @@ function Categories() {
                     src={c3}
                     alt
                   />
-                  <h6 className="categories-title">Lập trình Full Stack</h6>
+                  <h6 className="categories-title">Lập trình di động</h6>
                 </div>
               </a>
             </div>
@@ -71,7 +71,7 @@ function Categories() {
                     src={c4}
                     alt
                   />
-                  <h6 className="categories-title">Tư duy Lập trình</h6>
+                  <h6 className="categories-title">Lập trình Front end</h6>
                 </div>
               </a>
             </div>
@@ -83,7 +83,7 @@ function Categories() {
                     src={c5}
                     alt =""
                   />
-                  <h6 className="categories-title">Personal Development</h6>
+                  <h6 className="categories-title">Lập trình Full Stack</h6>
                 </div>
               </a>
             </div>
@@ -95,7 +95,7 @@ function Categories() {
                     src={c6}
                     alt =""
                   />
-                  <h6 className="categories-title">Business</h6>
+                  <h6 className="categories-title">Tư Duy Lập trình</h6>
                 </div>
               </a>
             </div>
